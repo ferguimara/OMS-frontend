@@ -4,6 +4,7 @@ import OrderTable from './components/OrderTable/OrderTable';
 import CreateOrderButton from './components/CreateOrderButton/CreateOrderButton';
 import Header from './components/Header/Header';
 
+//connect backend
 function App() {
   
   //states:
