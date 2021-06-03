@@ -1,4 +1,3 @@
-import OrderRow from '../OrderRow/OrderRow';
 import styles from './OrderTable.module.css';
 
 const OrderTable = (props) => (
