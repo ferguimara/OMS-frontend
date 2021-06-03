@@ -1,7 +1,7 @@
 const OrderRow = (props) => (
-    <div>
-        <p>Order</p>
-    </div>
+    <>
+        <p>hi</p>
+    </>
 );
 
 export default OrderRow;

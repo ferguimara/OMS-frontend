@@ -17,9 +17,16 @@ const OrderTable = (props) => (
                 <div>Status</div>
                 <div></div>
             </article>
-            <article>
-                <OrderRow />
-            </article>
+            {
+                props.orders.map((o, i) => (
+                    <article key={i}>
+                        <div>{o.date}</div>
+                        <div>{o.product}</div>
+                        <div>{o.price}</div>
+                        <div>{o.status}</div>
+                    </article>
+                ))
+            }
         </section>    
     </div>
 )
