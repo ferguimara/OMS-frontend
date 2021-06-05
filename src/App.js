@@ -4,7 +4,6 @@ import OrderTable from './components/OrderTable/OrderTable';
 import CreateOrderButton from './components/CreateOrderButton/CreateOrderButton';
 import Header from './components/Header/Header';
 
-//connect backend
 function App() {
   
   //states:
@@ -13,7 +12,7 @@ function App() {
       date: '6/1/2021',
       product: 'MacBook Pro',
       price: '$1,500',
-      status: 'For Sale',
+      status: 'forSale',
     }],
     newOrder: {
       //TODO: set this to a date
@@ -25,6 +24,22 @@ function App() {
   })
 
   //functions:
+
+  // Effect Function: Anything we need to run on page load goes here
+  useEffect(() => {
+    function getAppData() {
+      //simple fetch request to our express backend using fetch() web api
+      fetch('http://localhost:3001/api/skills')
+      .then(res => res.json())
+      .then(data => 
+        setState(prevState => ({ //set state to the actual data from our backend on page load
+          ...prevState,
+          orders: data
+        }))
+      ).catch(err => console.log(err))
+    }
+    getAppData();
+  }, []); //empty dependency array ensures effect funtion only gets called on initial load
 
   //onChange function: a setter function allowing us to access previous state and override it with new values
   function handleChange(e) {
