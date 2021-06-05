@@ -21,7 +21,8 @@ function App() {
       product: '',
       price: '$',
       status: 'pending',
-    }
+    },
+    editMode: false,
   })
 
   //Functions:
@@ -44,39 +45,92 @@ function App() {
 
   /* onChange function: a setter function allowing us to access previous state and override it with new values */
   function handleChange(e) {
-    setState((prevState) => ({
+    setState(prevState => ({
       ...prevState,
       newOrder: {
         ...prevState.newOrder,
         //the square brackets allow us to use an expression to "compute the property name"
         [e.target.name]: e.target.value,
-      }
-    }))
+      },
+    }));
   }
   
   /* addOrder function: adds order to our table from our form */
   async function handleSubmit(e) {
     e.preventDefault();
+    if(state.editMode){
+      const { _id, date, produce, price, status } = state.newOrder;
+      try{
+        // include _id as url param - note that we're receiving a new skill list as a response
+        const orders = await fetch(`http://localhost:3001/api/orders/${_id}`, {
+          method: 'PUT',
+          //header informs express to parse the incoming json data with express.json()
+          headers: {
+            'Content-type': 'Application/json'
+          },
+          body: JSON.stringify({date, product, price, status})
+        }).then(res => res.json())
+          setState({
+            orders,
+            newOrder: {
+              //TODO: set this to a date
+              date: '6/1/2021',
+              product: '',
+              price: '$',
+              status: 'pending',
+            },
+            editMode: false //set edit mode back to false
+          });
+      } catch (error){
+        console.log(error);
+      }
+    } else {
+      try {
+        const order = await fetch('http://localhost:3001/api/orders/', {
+          method: 'POST',
+          //header informs express to parse the incoming json data with express.json()
+          headers: {
+            'Content-type': 'Application/json'
+          },
+          body: JSON.stringify(state.newOrder)
+        }).then(res => res.json())
+          setState({
+            orders: [...state.orders, order],
+            newOrder: {
+              //TODO: set this to a date
+              date: '6/1/2021',
+              product: '',
+              price: '$',
+              status: 'pending',
+            }
+          });
+      } catch (error){
+        console.log(error);
+      }
+    }
+  }
+
+  /* handleEdit function: taking in the edits*/
+  function handleEdit(id) {
+    const orderToEdit = state.orders.find(order => order._id === id);
+    setState(prevState => ({
+      ...prevState,
+      newOrder: orderToEdit,
+      editMode: true,
+    }))
+  }
+
+  /* handleDelet: Delete order*/
+  async function handleDelete(id) {
     try{
-      const order = await fetch('http://localhost:3001/api/orders', {
-        method: 'POST',
-        //header informs express to parse the incoming json data with express.json()
-        headers: {
-          'Content-type': 'Application/json'
-        },
-        body: JSON.stringify(state.newOrder)
-      }).then(res => res.json())
-        setState({
-          orders: [...state.orders, state.newOrder],
-          newOrder: {
-            //TODO: set this to a date
-            date: '6/1/2021',
-            product: '',
-            price: '$',
-            status: 'pending',
-          }
-        });
-    } catch (error){
+      const orders = await fetch(`http://localhost:3001/api/orders/${id}`, {
+        method: 'DELETE'
+      }).then(res => res.json());
+      setState(prevState => ({
+        ...prevState,
+        orders,
+      }));
+    } catch (error) {
       console.log(error);
     }
   }
@@ -85,7 +139,11 @@ function App() {
   return (
     <div className="App">
       <Header/>
-      <OrderTable orders={state.orders}/>
+      <OrderTable 
+        orders={state.orders} 
+        handleEdit={handleEdit}
+        handleDelete={handleDelete}
+      />
       <CreateOrderButton />
       <h2>Create Order Below:</h2>
       <form className='createOrderForm' onSubmit={handleSubmit}>
@@ -109,7 +167,7 @@ function App() {
             <option value="pending">Pending</option>
           </select>
         </label>
-        <button>Submit Order</button>
+        <button>{state.editMode ? 'Edit Order' : 'Submit Order'}</button>
         
       </form>
       <footer>

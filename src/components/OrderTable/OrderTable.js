@@ -17,12 +17,22 @@ const OrderTable = (props) => (
                 <div></div>
             </article>
             {
-                props.orders.map((o, i) => (
-                    <article key={i}>
+                props.orders.map(o => (
+                    <article key={o._id}>
                         <div>{o.date}</div>
                         <div>{o.product}</div>
                         <div>{o.price}</div>
                         <div>{o.status}</div>
+                        <div
+                            className="controls"
+                            onClick={() => props.handleEdit(o._id)}>
+                        {'✏️'}
+                        </div>
+                        <div
+                            className="controls"
+                            onClick={() => props.handleDelete(o._id)}>
+                        {'🗑'}
+                        </div>
                     </article>
                 ))
             }
