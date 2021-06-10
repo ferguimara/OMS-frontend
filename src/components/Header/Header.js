@@ -3,7 +3,14 @@ import styles from './Header.module.css';
 function Header(props) {
     return(
         <header className={styles.header}>
-            <h1>{'⚛'}OMS Platform</h1>
+            <nav>
+                <img
+                    style={{height: '2.8rem'}}
+                    src={'https://i.imgur.com/DaaMaPx.png'}
+                    alt={'tomorrowhealth'}
+                />
+                <h1>Tomorrow Health</h1>
+            </nav>
             <nav>
                 <ul>
                     <li>Welcom, Fernando</li>

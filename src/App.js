@@ -59,7 +59,7 @@ function App() {
   async function handleSubmit(e) {
     e.preventDefault();
     if(state.editMode){
-      const { _id, date, produce, price, status } = state.newOrder;
+      const { _id, date, product, price, status } = state.newOrder;
       try{
         // include _id as url param - note that we're receiving a new skill list as a response
         const orders = await fetch(`http://localhost:3001/api/orders/${_id}`, {
@@ -70,7 +70,8 @@ function App() {
           },
           body: JSON.stringify({date, product, price, status})
         }).then(res => res.json())
-          setState({
+          setState(prevState => ({
+            ...prevState,
             orders,
             newOrder: {
               //TODO: set this to a date
@@ -80,13 +81,14 @@ function App() {
               status: 'pending',
             },
             editMode: false //set edit mode back to false
-          });
+          }));
       } catch (error){
         console.log(error);
       }
     } else {
       try {
-        const order = await fetch('http://localhost:3001/api/orders/', {
+        console.log(state.newOrder)
+        const order = await fetch('http://localhost:3001/api/orders', {
           method: 'POST',
           //header informs express to parse the incoming json data with express.json()
           headers: {
@@ -162,9 +164,9 @@ function App() {
         <label>
           <span>Status</span>
           <select name="status" value={state.newOrder.status} onChange={handleChange}>
-            <option value="forSale">For Sale</option>
-            <option value="outOfStock">Out of Stock</option>
-            <option value="pending">Pending</option>
+            <option value="For Sale">For Sale</option>
+            <option value="Out of Stock">Out of Stock</option>
+            <option value="Pending">Pending</option>
           </select>
         </label>
         <button>{state.editMode ? 'Edit Order' : 'Submit Order'}</button>

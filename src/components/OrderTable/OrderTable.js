@@ -8,35 +8,36 @@ const OrderTable = (props) => (
                 padding: '25px'
             }}
         >Order Dashboard:</h2>
-        <section>
-            <article>
-                <div>Date</div>
-                <div>Product</div>
-                <div>Price</div>
-                <div>Status</div>
-                <div></div>
-            </article>
+        <table>
+            <thead>
+                <th>Date</th>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Status</th>
+                <th></th>
+                <th></th>
+            </thead>
             {
                 props.orders.map(o => (
-                    <article key={o._id}>
-                        <div>{o.date}</div>
-                        <div>{o.product}</div>
-                        <div>{o.price}</div>
-                        <div>{o.status}</div>
-                        <div
+                    <tr key={o._id}>
+                        <td>{o.date}</td>
+                        <td>{o.product}</td>
+                        <td>{o.price}</td>
+                        <td>{o.status}</td>
+                        <td
                             className="controls"
                             onClick={() => props.handleEdit(o._id)}>
                         {'✏️'}
-                        </div>
-                        <div
+                        </td>
+                        <td 
                             className="controls"
                             onClick={() => props.handleDelete(o._id)}>
                         {'🗑'}
-                        </div>
-                    </article>
+                        </td>
+                    </tr>
                 ))
             }
-        </section>    
+        </table>   
     </div>
 )
 

@@ -3,9 +3,9 @@
     justify-content: space-between;
     align-items: center;
     padding: 0 1rem;
-    background-color: #737495;
-    color: #ffffff;
-    box-shadow: 1px 1px 2px 1px #808080;
+    background-color: white;
+    color: #002638;
+    box-shadow: 0px 15px 10px -15px #111;
     width: 100%;
 }
 
