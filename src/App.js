@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
 import './App.css';
-import OrderTable from './components/OrderTable/OrderTable';
-import CreateOrderButton from './components/CreateOrderButton/CreateOrderButton';
 import Header from './components/Header/Header';
 import LandingPage from './components/Landing/Landing';
 import SignUpPage from './components/SignUp/SignUp';
@@ -9,6 +7,7 @@ import SignInPage from './components/SignIn/SignIn';
 import PasswordForgetPage from './components/PasswordForget/PasswordForget';
 import AccountPage from './components/Account/Account';
 import AdminPage from './components/Admin/Admin';
+import { withAuthentication } from './components/Session/Session';
 //Importing Pages:
 import OrderPage from './pages/OrderPage/OrderPage';
 import NewOrderPage from './pages/NewOrderPage/NewOrderPage';
@@ -153,7 +152,7 @@ function App() {
   //Render:
   return (
     <div className="App">
-      <Header/>
+      <Header />
       <Switch>
         <Route 
           exact path='/home' 
@@ -215,4 +214,4 @@ function App() {
   );
 }
 
-export default App;
+export default withAuthentication(App);
