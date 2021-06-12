@@ -3,6 +3,11 @@ import './App.css';
 import OrderTable from './components/OrderTable/OrderTable';
 import CreateOrderButton from './components/CreateOrderButton/CreateOrderButton';
 import Header from './components/Header/Header';
+//Importing Pages:
+import OrderPage from './pages/OrderPage/OrderPage';
+import NewOrderPage from './pages/NewOrderPage/NewOrderPage';
+//Import Route from react-router-dom
+import { Route, Switch } from 'react-router-dom';
 
 function App() {
   
@@ -13,14 +18,14 @@ function App() {
       product: 'MacBook Pro',
       price: '$1,500',
       //TODO: figure out best way of managing these status and connecting to select
-      status: 'forSale',
+      status: 'For Sale',
     }],
     newOrder: {
       //TODO: set this to a date
       date: '6/1/2021',
       product: '',
       price: '$',
-      status: 'pending',
+      status: 'Pending',
     },
     editMode: false,
   })
@@ -78,7 +83,7 @@ function App() {
               date: '6/1/2021',
               product: '',
               price: '$',
-              status: 'pending',
+              status: 'Pending',
             },
             editMode: false //set edit mode back to false
           }));
@@ -103,7 +108,7 @@ function App() {
               date: '6/1/2021',
               product: '',
               price: '$',
-              status: 'pending',
+              status: 'Pending',
             }
           });
       } catch (error){
@@ -141,37 +146,36 @@ function App() {
   return (
     <div className="App">
       <Header/>
-      <OrderTable 
-        orders={state.orders} 
-        handleEdit={handleEdit}
-        handleDelete={handleDelete}
-      />
-      <CreateOrderButton />
-      <h2>Create Order Below:</h2>
-      <form className='createOrderForm' onSubmit={handleSubmit}>
-        <label>
-          <span>Date</span>
-          <input name="date" value={state.newOrder.date} onChange={handleChange}/>
-        </label>
-        <label>
-          <span>Product</span>
-          <input name="product" value={state.newOrder.product} onChange={handleChange}/>
-        </label>
-        <label>
-          <span>Price</span>
-          <input name="price" value={state.newOrder.price} onChange={handleChange}/>
-        </label>
-        <label>
-          <span>Status</span>
-          <select name="status" value={state.newOrder.status} onChange={handleChange}>
-            <option value="For Sale">For Sale</option>
-            <option value="Out of Stock">Out of Stock</option>
-            <option value="Pending">Pending</option>
-          </select>
-        </label>
-        <button>{state.editMode ? 'Edit Order' : 'Submit Order'}</button>
-        
-      </form>
+      <Switch>
+        <Route 
+          exact path='/' 
+          render={() => 
+            <OrderPage 
+              orders={state.orders} 
+              handleEdit={handleEdit}
+              handleDelete={handleDelete}
+              handleSubmit={handleSubmit}
+              newOrder={state.newOrder}
+              handleChange={handleChange}
+              editMode={state.editMode}
+          />
+        } />
+        <Route 
+          exact path='/new-order' 
+          render={(props) => 
+            <NewOrderPage 
+              {...props}
+              orders={state.orders} 
+              handleEdit={handleEdit}
+              handleDelete={handleDelete}
+              handleSubmit={handleSubmit}
+              newOrder={state.newOrder}
+              handleChange={handleChange}
+              editMode={state.editMode}
+              />
+          }
+        />
+      </Switch>
       <footer>
         <p>All Rights Reserved</p>
       </footer>

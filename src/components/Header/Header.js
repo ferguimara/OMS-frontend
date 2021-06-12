@@ -13,7 +13,7 @@ function Header(props) {
             </nav>
             <nav>
                 <ul>
-                    <li>Welcom, Fernando</li>
+                    <li>Welcome, Fernando</li>
                     <li>
                         <img 
                             style={{height: '2.8rem', borderRadius: '50%'}}
