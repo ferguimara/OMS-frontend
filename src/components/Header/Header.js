@@ -1,4 +1,5 @@
 import styles from './Header.module.css';
+import SignOutButton from '../SignOut/SignOut';
 //Importing Routes:
 import * as ROUTES from '../../constants/routes';
 //Import Link:
@@ -31,6 +32,9 @@ function Header(props) {
                     </li>
                     <li>
                         <Link to={ROUTES.ADMIN}>Admin</Link>
+                    </li>
+                    <li>
+                        <SignOutButton />
                     </li>
                 </ul>
             </nav>
