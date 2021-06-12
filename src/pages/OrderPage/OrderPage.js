@@ -1,7 +1,8 @@
 import OrderTable from '../../components/OrderTable/OrderTable';
 import CreateOrderButton from '../../components/CreateOrderButton/CreateOrderButton';
+import { withAuthorization } from '../../components/Session/Session';
 import { Link } from 'react-router-dom';
-import styles from '../../App.css'
+import styles from '../../App.css';
 
 const OrderPage = props => {
     return (
@@ -43,4 +44,6 @@ const OrderPage = props => {
     )
 }
 
-export default OrderPage
+const condition = authUser => !!authUser;
+
+export default withAuthorization(condition)(OrderPage);
