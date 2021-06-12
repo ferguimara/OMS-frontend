@@ -4,5 +4,11 @@ import React from 'react';
 //The FirebaseContect.Provider component is used to provide a Firebase instrance once at the top-level of React component tree
 //The FirebaseContext.Consumer componend is used to retrieve the Firebase instance if it is needed in the React Component
 const FirebaseContext = React.createContext(null);
+
+export const withFirebase = Component => props => (
+    <FirebaseContext.Consumer>
+      {firebase => <Component {...props} firebase={firebase} />}
+    </FirebaseContext.Consumer>
+);
  
 export default FirebaseContext;
