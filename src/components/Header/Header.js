@@ -1,4 +1,8 @@
 import styles from './Header.module.css';
+//Importing Routes:
+import * as ROUTES from '../../constants/routes';
+//Import Link:
+import { Link } from 'react-router-dom';
 
 function Header(props) {
     return(
@@ -13,15 +17,21 @@ function Header(props) {
             </nav>
             <nav>
                 <ul>
-                    <li>Welcome, Fernando</li>
                     <li>
-                        <img 
-                            style={{height: '2.8rem', borderRadius: '50%'}}
-                            src={'https://i.imgur.com/MTb1VJh.jpg?2'} 
-                            alt={'fernando'}
-                        />
+                        <Link to={ROUTES.SIGN_IN}>Sign In</Link>
                     </li>
-                    <li>Logout</li>
+                    <li>
+                        <Link to={ROUTES.LANDING}>Landing</Link>
+                    </li>
+                    <li>
+                        <Link to={ROUTES.HOME}>Home</Link>
+                    </li>
+                    <li>
+                        <Link to={ROUTES.ACCOUNT}>Account</Link>
+                    </li>
+                    <li>
+                        <Link to={ROUTES.ADMIN}>Admin</Link>
+                    </li>
                 </ul>
             </nav>
         </header>

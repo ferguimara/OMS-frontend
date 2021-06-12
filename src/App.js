@@ -3,11 +3,19 @@ import './App.css';
 import OrderTable from './components/OrderTable/OrderTable';
 import CreateOrderButton from './components/CreateOrderButton/CreateOrderButton';
 import Header from './components/Header/Header';
+import LandingPage from './components/Landing/Landing';
+import SignUpPage from './components/SignUp/SignUp';
+import SignInPage from './components/SignIn/SignIn';
+import PasswordForgetPage from './components/PasswordForget/PasswordForget';
+import AccountPage from './components/Account/Account';
+import AdminPage from './components/Admin/Admin';
 //Importing Pages:
 import OrderPage from './pages/OrderPage/OrderPage';
 import NewOrderPage from './pages/NewOrderPage/NewOrderPage';
 //Import Route from react-router-dom
 import { Route, Switch } from 'react-router-dom';
+//Importing Routes:
+import * as ROUTES from './constants/routes';
 
 function App() {
   
@@ -148,7 +156,7 @@ function App() {
       <Header/>
       <Switch>
         <Route 
-          exact path='/' 
+          exact path='/home' 
           render={() => 
             <OrderPage 
               orders={state.orders} 
@@ -174,6 +182,30 @@ function App() {
               editMode={state.editMode}
               />
           }
+        />
+        <Route 
+          exact path={ROUTES.LANDING} 
+          component={LandingPage} 
+        />
+        <Route 
+          path={ROUTES.SIGN_UP} 
+          component={SignUpPage} 
+        />
+        <Route 
+          path={ROUTES.SIGN_IN} 
+          component={SignInPage} 
+        />
+        <Route 
+          path={ROUTES.PASSWORD_FORGET} 
+          component={PasswordForgetPage} 
+        />
+        <Route 
+          path={ROUTES.ACCOUNT} 
+          component={AccountPage} 
+        />
+        <Route 
+          path={ROUTES.ADMIN} 
+          component={AdminPage} 
         />
       </Switch>
       <footer>

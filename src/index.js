@@ -2,13 +2,17 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+//Providing a Firebase instance to full app
+import Firebase, { FirebaseContext } from './components/Firebase/index';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router } from 'react-router-dom'
 
 ReactDOM.render(
   <React.StrictMode>
     <Router>
-      <App />
+      <FirebaseContext.Provider value={new Firebase()}>
+        <App />
+      </FirebaseContext.Provider>
     </Router>
   </React.StrictMode>,
   document.getElementById('root')
