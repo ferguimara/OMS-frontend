@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 import styles from './OrderTable.module.css';
 
 const OrderTable = (props) => (

@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom';
-
 const NewOrderPage = props => {
     return (
         <>
@@ -27,7 +25,6 @@ const NewOrderPage = props => {
                 </label>
                 <button>{props.editMode ? 'Edit Order' : 'Submit Order'}</button>
             </form>
-            <Link className='styles.button' to='/home'>View All</Link>
         </>
     )
 }

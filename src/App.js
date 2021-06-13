@@ -12,11 +12,11 @@ import { withAuthentication } from './components/Session/Session';
 import OrderPage from './pages/OrderPage/OrderPage';
 import NewOrderPage from './pages/NewOrderPage/NewOrderPage';
 //Import Route from react-router-dom
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, withRouter } from 'react-router-dom';
 //Importing Routes:
 import * as ROUTES from './constants/routes';
 
-function App() {
+function App(props) {
   
   //States:
   const [ state, setState ] = useState({
@@ -100,14 +100,16 @@ function App() {
     } else {
       try {
         console.log(state.newOrder)
+        console.log('user id:', props.authUser.uid);
         const order = await fetch('http://localhost:3001/api/orders', {
           method: 'POST',
           //header informs express to parse the incoming json data with express.json()
           headers: {
             'Content-type': 'Application/json'
           },
-          body: JSON.stringify(state.newOrder)
+          body: JSON.stringify(state.newOrder, props.authUser.uid)
         }).then(res => res.json())
+          console.log(order)
           setState({
             orders: [...state.orders, order],
             newOrder: {
@@ -118,6 +120,7 @@ function App() {
               status: 'Pending',
             }
           });
+          props.history.push('/home')
       } catch (error){
         console.log(error);
       }
@@ -214,4 +217,4 @@ function App() {
   );
 }
 
-export default withAuthentication(App);
+export default withAuthentication(withRouter(App));

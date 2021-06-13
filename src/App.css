@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  flex-grow: 1;
 }
 
 .App-header {
@@ -76,4 +77,8 @@ button:hover {
   color: white;
   background-color: #1b7c62;
   border: 2px solid #1b7c62;
+}
+
+.footer {
+  flex-grow: 1;
 }

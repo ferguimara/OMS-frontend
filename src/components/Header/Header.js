@@ -29,13 +29,13 @@ function NavigationAuth() {
             </nav>
             <ul>
                 <li>
-                    <Link to={ROUTES.LANDING}>Landing</Link>
-                </li>
-                <li>
-                    <Link to={ROUTES.HOME}>Home</Link>
+                    <Link to={ROUTES.HOME}>All Orders</Link>
                 </li>
                 <li>
                     <Link to={ROUTES.ACCOUNT}>Account</Link>
+                </li>
+                <li>
+                    <Link to={ROUTES.ADMIN}>Admin</Link>
                 </li>
                 <li>
                     <SignOutButton />
@@ -54,12 +54,14 @@ function NavigationNonAuth() {
                     src={'https://i.imgur.com/DaaMaPx.png'}
                     alt={'tomorrowhealth'}
                 />
-                <h1>Tomorrow Health</h1>
+                <h1>
+                    <Link to={ROUTES.LANDING}>Tomorrow Health</Link>
+                </h1>
             </nav>
             <nav>
                 <ul>
                     <li>
-                        <Link to={ROUTES.LANDING}>Landing</Link>
+                        <Link to={ROUTES.LANDING}>Welcome</Link>
                     </li>
                     <li>
                         <Link to={ROUTES.SIGN_IN}>Sign In</Link>
