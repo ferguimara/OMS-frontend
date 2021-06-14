@@ -22,17 +22,23 @@ const INITIAL_STATE = {
     error: null,
 };
  
+//create our component
 class SignUpFormBase extends Component {
   constructor(props) {
     super(props);
 
+    //initialize state
     this.state = { ...INITIAL_STATE };
   }
- 
+  
+  /* ***Functions*** */
+
   //the onSubmit() class method, which will pass all the form data to the Firebase authentication API via your authentication interface in the Firebase class:
   onSubmit = event => {
+    //deconstructing our local state into variables
     const { username, email, passwordOne } = this.state;
- 
+    
+    //use our firebase method from class to create a user
     this.props.firebase
       .doCreateUserWithEmailAndPassword(email, passwordOne)
       .then(authUser => {
@@ -44,22 +50,27 @@ class SignUpFormBase extends Component {
             email,
           });
       })
+      //set state back to initital state of empty fields
       .then(() => {
         this.setState({ ...INITIAL_STATE });
         this.props.history.push(ROUTES.HOME);
       })
+      //display error if error
       .catch(error => {
         this.setState({ error });
         });
- 
-        event.preventDefault();
+      
+      //prevent page refreach
+      event.preventDefault();
     };
  
+  //updating the local state with what is in input fields
   onChange = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
  
   render() {
+    //our local state 
     const {
         username,
         email,
@@ -75,6 +86,7 @@ class SignUpFormBase extends Component {
       email === '' ||
       username === '';
 
+    //Return all our our input functions
     return (
       <form onSubmit={this.onSubmit}>
         <input
@@ -105,6 +117,7 @@ class SignUpFormBase extends Component {
           type="password"
           placeholder="Confirm Password"
         />
+        {/* disable button if isInvalid is false */}
         <button disabled={isInvalid} type="submit" style={{textDecoration: 'underline !important'}}>
             Sign Up
         </button>
@@ -122,6 +135,8 @@ const SignUpLink = () => (
   </p>
 );
 
+//We use compose as a better way to wrap componenet with high-order components
+//wrap our signupform with 'withfirebase', 'withrouter'(to get access to all router props) which is what is rendered
 const SignUpForm = compose(
     withRouter,
     withFirebase,

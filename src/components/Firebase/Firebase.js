@@ -1,7 +1,10 @@
+//imported firebase
 import app from 'firebase/app';
+//import our firebase auth
 import 'firebase/auth';
 import 'firebase/database';
  
+//connected config to .env
 const config = {
     apiKey: process.env.REACT_APP_API_KEY,
     authDomain: process.env.REACT_APP_AUTH_DOMAIN,
@@ -11,15 +14,18 @@ const config = {
     messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
 };
 
+//initialized firebase via the firebase class
 class Firebase {
+    //initialized firebase
     constructor() {
-      app.initializeApp(config);
-
-      this.auth = app.auth();
-      this.db = app.database();
+        app.initializeApp(config);
+    
+        //instantiate the auth
+        this.auth = app.auth();
+        this.db = app.database();
     }
 
-    // *** Aut API ***
+    // *** Aut API Functions: ***
 
     //sign up function (registration) takes email and password parameters 
     //for its function signature and uses an official Firebase API endpoint to create a user:

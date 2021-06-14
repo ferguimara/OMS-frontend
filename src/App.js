@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import './App.css';
+//Importing Components:
 import Header from './components/Header/Header';
 import LandingPage from './components/Landing/Landing';
 import SignUpPage from './components/SignUp/SignUp';
@@ -15,6 +16,37 @@ import NewOrderPage from './pages/NewOrderPage/NewOrderPage';
 import { Route, Switch, withRouter } from 'react-router-dom';
 //Importing Routes:
 import * as ROUTES from './constants/routes';
+
+/*
+***Intro to App ***
+1. First thing that I did was establish a constants folder with a file for routes.
+I exported all of these routes to make referencing themn easier
+
+2. Setting up our routes: 
+a. Built a routes file in constants to house all of our route paths
+b. Built a header component that houses the navigation of our app 
+
+3. Firebase in react setup: 
+a. added firebase configuration to .env
+b. added a firebase.js file to house all firebase files and initialized firebase
+
+4. Connecting Firebase with react:
+a. using React's context api to provide a firebase instance at top-level component and tunnel everything down
+b. start with firebase/context.js
+c. add our context provider to the top level of our app, index.js
+
+5. Implement interface of our Firebase class
+a. import and instantiate auth package in firebase.js
+
+6. Sign up, Sign in, Sign out function
+a. build out basic form
+b. leverage our higher-order components. go to context.js 
+where we render a component withFirebase so we dont need to call it every time
+c.use compose with to wrap each component with 'withFirebase' and 'withRouter'
+*/
+
+
+
 
 function App(props) {
   
@@ -107,7 +139,7 @@ function App(props) {
           headers: {
             'Content-type': 'Application/json'
           },
-          body: JSON.stringify(state.newOrder, props.authUser.uid)
+          body: JSON.stringify({...state.newOrder, uid: props.authUser.uid })
         }).then(res => res.json())
           console.log(order)
           setState({
@@ -155,10 +187,11 @@ function App(props) {
   //Render:
   return (
     <div className="App">
+      {/* Our header component will house most of our paths and will change based on user */}
       <Header />
       <Switch>
         <Route 
-          exact path='/home' 
+          exact path={ROUTES.HOME} 
           render={() => 
             <OrderPage 
               orders={state.orders} 
@@ -171,7 +204,7 @@ function App(props) {
           />
         } />
         <Route 
-          exact path='/new-order' 
+          exact path={ROUTES.NEW_ORDER} 
           render={(props) => 
             <NewOrderPage 
               {...props}

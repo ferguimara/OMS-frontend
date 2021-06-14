@@ -16,22 +16,30 @@ const SignInPage = () => (
   </div>
 );
  
+//Initialize State of the Component:
 const INITIAL_STATE = {
   email: '',
   password: '',
   error: null,
 };
- 
+
+//create our component
 class SignInFormBase extends Component {
   constructor(props) {
     super(props);
- 
+
+    //initialize state
     this.state = { ...INITIAL_STATE };
   }
  
+  /* ***Functions*** */
+
+  //the onSubmit() class method, which will pass all the form data to the Firebase authentication API via your authentication interface in the Firebase class:
   onSubmit = event => {
+    //deconstructing our local state into variables
     const { email, password } = this.state;
- 
+    
+    //use our firebase method from class to create a user
     this.props.firebase
       .doSignInWithEmailAndPassword(email, password)
       .then(() => {
@@ -45,15 +53,19 @@ class SignInFormBase extends Component {
     event.preventDefault();
   };
  
+  //updating the local state with what is in input fields
   onChange = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
  
   render() {
+    //our local state
     const { email, password, error } = this.state;
- 
+    
+    //use an isInvalid boolean to enable or disable the submit button
     const isInvalid = password === '' || email === '';
  
+    //Return all our our input functions
     return (
       <form onSubmit={this.onSubmit}>
         <input

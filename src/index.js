@@ -10,6 +10,7 @@ import { BrowserRouter as Router } from 'react-router-dom'
 ReactDOM.render(
   <React.StrictMode>
     <Router>
+      {/* providing our context to our top level component. we can now access this whenever via firebasecontext.consumer */}
       <FirebaseContext.Provider value={new Firebase()}>
         <App />
       </FirebaseContext.Provider>
