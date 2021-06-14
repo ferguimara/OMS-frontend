@@ -50,6 +50,8 @@ c.use compose with to wrap each component with 'withFirebase' and 'withRouter'
 
 function App(props) {
   
+  const BASE_URL = 'https://oms-backend-fg.herokuapp.com/api/orders'
+  
   //States:
   const [ state, setState ] = useState({
     orders: [{
@@ -75,7 +77,7 @@ function App(props) {
   useEffect(() => {
     function getAppData() {
       //simple fetch request to our express backend using fetch() web api
-      fetch('http://localhost:3001/api/orders')
+      fetch(BASE_URL)
       .then(res => res.json())
       .then(data => 
         setState(prevState => ({ //set state to the actual data from our backend on page load
@@ -106,7 +108,7 @@ function App(props) {
       const { _id, date, product, price, status } = state.newOrder;
       try{
         // include _id as url param - note that we're receiving a new skill list as a response
-        const orders = await fetch(`http://localhost:3001/api/orders/${_id}`, {
+        const orders = await fetch(`${BASE_URL}/${_id}`, {
           method: 'PUT',
           //header informs express to parse the incoming json data with express.json()
           headers: {
@@ -133,7 +135,7 @@ function App(props) {
       try {
         console.log(state.newOrder)
         console.log('user id:', props.authUser.uid);
-        const order = await fetch('http://localhost:3001/api/orders', {
+        const order = await fetch(BASE_URL, {
           method: 'POST',
           //header informs express to parse the incoming json data with express.json()
           headers: {
@@ -172,7 +174,7 @@ function App(props) {
   /* handleDelet: Delete order*/
   async function handleDelete(id) {
     try{
-      const orders = await fetch(`http://localhost:3001/api/orders/${id}`, {
+      const orders = await fetch(`${BASE_URL}/${id}`, {
         method: 'DELETE'
       }).then(res => res.json());
       setState(prevState => ({
