@@ -53,4 +53,4 @@ Version 1:
 - Only see orders for that user
 
 ## Resources that Helped Me Out
-[Click here](https://www.robinwieruch.de/complete-firebase-authentication-react-tutorial) Here is a very informative guide that breaks down Firebase implementation with React apps!
+[Here](https://www.robinwieruch.de/complete-firebase-authentication-react-tutorial) is a very informative guide that breaks down Firebase implementation with React apps!
