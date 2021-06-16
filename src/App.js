@@ -8,6 +8,7 @@ import SignInPage from './components/SignIn/SignIn';
 import PasswordForgetPage from './components/PasswordForget/PasswordForget';
 import AccountPage from './components/Account/Account';
 import AdminPage from './components/Admin/Admin';
+//Import our Session:
 import { withAuthentication } from './components/Session/Session';
 //Importing Pages:
 import OrderPage from './pages/OrderPage/OrderPage';
@@ -43,6 +44,17 @@ a. build out basic form
 b. leverage our higher-order components. go to context.js 
 where we render a component withFirebase so we dont need to call it every time
 c.use compose with to wrap each component with 'withFirebase' and 'withRouter'
+
+7. Implementing global state to oversee the session state
+a. Started with our header and pass our authenticated user to change the header
+b. Then implement the React context API to pass down Session instance like we did with Firebase, started with Sessions component, context
+c. Then extract the session handling for the authenticated user to a seperate higher-order component: withAuthentication.js
+d. Now we can have our Header consume it
+e. Now we can wrap our App in it
+
+8. Password reset and change
+a. Password forget form
+b. Password change form
 */
 
 
@@ -251,5 +263,5 @@ function App(props) {
     </div>
   );
 }
-
+//export the app wrapped with Auth
 export default withAuthentication(withRouter(App));

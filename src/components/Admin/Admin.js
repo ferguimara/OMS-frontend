@@ -39,7 +39,7 @@ class AdminPage extends Component {
 
     return (
       <div>
-        <h1>Admin</h1>
+        <h1>Welcome, Admin</h1>
 
         {loading && <div>Loading ...</div>}
 

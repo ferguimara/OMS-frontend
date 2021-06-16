@@ -4,25 +4,30 @@ import { Link } from 'react-router-dom';
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
  
+//render page
 const PasswordForgetPage = () => (
   <div>
     <h1>PasswordForget</h1>
     <PasswordForgetForm />
   </div>
 );
- 
+
+//initialize state
 const INITIAL_STATE = {
   email: '',
   error: null,
 };
- 
+
+//create component
 class PasswordForgetFormBase extends Component {
   constructor(props) {
     super(props);
  
     this.state = { ...INITIAL_STATE };
   }
- 
+  
+  //functions:
+
   onSubmit = event => {
     const { email } = this.state;
  
@@ -41,7 +46,8 @@ class PasswordForgetFormBase extends Component {
   onChange = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
- 
+  
+  //render
   render() {
     const { email, error } = this.state;
  
@@ -65,7 +71,8 @@ class PasswordForgetFormBase extends Component {
     );
   }
 }
- 
+
+//password forget link to be used elsewhere
 const PasswordForgetLink = () => (
   <p>
     <Link to={ROUTES.PASSWORD_FORGET} style={{textDecoration: 'underline', color: 'blue'}}>Forgot Password?</Link>
@@ -73,7 +80,8 @@ const PasswordForgetLink = () => (
 );
  
 export default PasswordForgetPage;
- 
+
+//modify component to be wraped with firebase and then use above
 const PasswordForgetForm = withFirebase(PasswordForgetFormBase);
  
 export { PasswordForgetForm, PasswordForgetLink };

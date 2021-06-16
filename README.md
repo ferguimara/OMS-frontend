@@ -27,12 +27,17 @@ Initial wireframes:
 
 Version 1:
 
-![indexpage](https://i.imgur.com/R6rmcJd.png)
+![landingpage](https://i.imgur.com/qkRWC47.png)
 
-![showpage](https://i.imgur.com/dskezCi.png)
+![signinpage](https://i.imgur.com/3HKEVSs.png)
 
-![workoutpage](https://i.imgur.com/jcWBy7I.png)
+![orderpage](https://i.imgur.com/KTC4MuA.png)
 
+![editpage](https://i.imgur.com/PI9q01B.png)
+
+![createpage](https://i.imgur.com/hfiMVHS.png)
+
+![accountpage](https://i.imgur.com/NBbpW8Y.png)
 
 
 ## Getting Started
@@ -44,6 +49,8 @@ Version 1:
 - Enhance what orders look like
 - For buyers, add a cart option
 - Clean up code
+- Fix Admin Page
+- Only see orders for that user
 
 ## Resources that Helped Me Out
 [Click here](https://www.robinwieruch.de/complete-firebase-authentication-react-tutorial) Here is a very informative guide that breaks down Firebase implementation with React apps!

@@ -1,20 +1,24 @@
 import React, { Component } from 'react';
  
 import { withFirebase } from '../Firebase';
- 
+
+//initialize state
 const INITIAL_STATE = {
   passwordOne: '',
   passwordTwo: '',
   error: null,
 };
- 
+
+//create component
 class PasswordChangeForm extends Component {
   constructor(props) {
     super(props);
  
     this.state = { ...INITIAL_STATE };
   }
- 
+  
+  //Functions:
+
   onSubmit = event => {
     const { passwordOne } = this.state;
  
@@ -33,7 +37,8 @@ class PasswordChangeForm extends Component {
   onChange = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
- 
+  
+  //render
   render() {
     const { passwordOne, passwordTwo, error } = this.state;
  
@@ -65,5 +70,6 @@ class PasswordChangeForm extends Component {
     );
   }
 }
- 
+
+//export wrapped in firebase
 export default withFirebase(PasswordChangeForm);

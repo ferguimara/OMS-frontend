@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom';
 function Header(props) {
     return(
         //We are checking if a user is authenticated (T/F) if auth, we render the Navigation auth and if not we render the other
+        //Consume our AuthUser higher-order component
         <AuthUserContext.Consumer>
             {authUser =>
                 authUser ? <NavigationAuth /> : <NavigationNonAuth />
